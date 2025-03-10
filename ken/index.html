@@ -261,34 +261,6 @@
 
 
 
-<!-- Contact us-->
-<?php
-include 'db_connect.php'; // Include the database connection file
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
-    $phone = $_POST["phone"];
-    $email = $_POST["email"];
-    $inquiry = $_POST["inquiry"];
-    $description = $_POST["description"];
-
-    // Prepare SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("INSERT INTO contacts (name, phone, email, inquiry, description) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $name, $phone, $email, $inquiry, $description);
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Your inquiry has been submitted successfully!'); window.location.href='index.php';</script>";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-}
-
-$conn->close();
-
-?>
 <section class="contact-section" id="contacts">
     <div class="contact-container">
         <div class="row">
@@ -315,7 +287,7 @@ $conn->close();
             <!-- Contact Form Column -->
             <div class="column">
                 <h3>CONTACT US</h3>
-                <form action="index.php" method="post">
+                <form action="index.html" method="post">
                     <input type="text" name="name" placeholder="Name" required><br>
                     <input type="tel" name="phone" placeholder="Phone Number" required><br>
                     <input type="email" name="email" placeholder="Email" required><br>
